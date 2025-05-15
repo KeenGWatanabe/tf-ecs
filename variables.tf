@@ -15,3 +15,12 @@ variable "name_prefix" {
   description = "ecs for ce994"
   default = "ce994"
 }
+
+variable "alb_subnet_ids" {
+  type = list(string)
+}
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs for ECS tasks"
+  type        = list(string)
+}

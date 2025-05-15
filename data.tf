@@ -5,8 +5,8 @@ data "aws_subnets" "private" {
   }
   # Optional: Filter by tags if needed
   filter {
-    name   = "tag:Name"
-    values = ["private-*"]  # Adjust to match your subnet naming
+    name   = "tag:Type"
+    values = ["private"]  # Adjust to match your subnet naming
   }
 }
 
