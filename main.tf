@@ -1,3 +1,14 @@
+terraform {
+  backend "s3" {
+    bucket = "ce994.tfstate-backend.com"
+    key = "ecs/terraform.tfstate"
+    region = "us-east-1"
+    dynamodb_table = "terraform-state-locks"  # Critical for locking
+  }
+}
+
+
+
 provider "aws" {
   region = "us-east-1"
 }
