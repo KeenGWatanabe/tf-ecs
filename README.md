@@ -24,6 +24,15 @@ docker push your-account-id.dkr.ecr.us-east-1.amazonaws.com/your-app-name:latest
 # new deployment in ECS
 aws ecs update-service --cluster nodejs-app-cluster --service nodejs-app-service --force-new-deployment
 
+# recreate cluster via cli
+aws ecs create-service \
+    --cluster nodejs-app-cluster \
+    --service-name nodejs-app-service \
+    --task-definition arn:aws:ecs:us-east-1:255945442255:task-definition/nodejs-app-task:5 \
+    --desired-count 1 \
+    --launch-type FARGATE \
+    --network-configuration "awsvpcConfiguration={subnets=[subnet-0c0137fdc2b0f229c,subnet-0cd0906f4e874731e],securityGroups=[sg-0721f22958cfab32b],assignPublicIp=\"ENABLED\"}"
+
 # Manual cleanup sequence:
 terraform destroy
 

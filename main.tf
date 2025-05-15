@@ -18,10 +18,22 @@ module "ecs" {
   version = "~> 5.0"
 
   cluster_name = "nodejs-app-cluster"
-
+  cluster_configuration = {
+      execute_command_configuration = {
+        logging = "OVERRIDE"
+        log_configuration = {
+          cloud_watch_log_group_name = "/aws/ecs/aws-ec2"
+        }
+      }
+    }
   # Capacity provider - Fargate
   fargate_capacity_providers = {
     FARGATE = {
+      default_capacity_provider_strategy = {
+        weight = 100
+      }
+    }
+    FARGATE_SPOT = {
       default_capacity_provider_strategy = {
         weight = 100
       }
@@ -32,6 +44,11 @@ module "ecs" {
     Environment = "production"
     Application = "nodejs-app"
   }
+}
+# Create CLoudWatch Log Group for taskDef reference
+resource "aws_cloudwatch_log_group" "app" {
+  name              = "/ecs/nodejs-app"
+  retention_in_days = 30
 }
 
 resource "aws_ecs_task_definition" "app" {
