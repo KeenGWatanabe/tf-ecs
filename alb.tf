@@ -3,7 +3,7 @@ resource "aws_lb" "app" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = data.aws_subnets.public.ids #aws_subnet.public[*].id
+  subnets            = slice(data.aws_subnets.public.ids, 0, 1)  # Takes first 2 subnets#data.aws_subnets.public[0].id 
   
   enable_deletion_protection = false
 
