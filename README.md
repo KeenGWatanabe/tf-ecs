@@ -1,6 +1,6 @@
 # this terraforms one Container for app, IGW (pub subnets) NAT (pte subnets) 
 modules/ecs/
-├── main.tf [alb, iam, security] # Primary ECS resources
+├── main.tf [ecs, alb, iam, security] # Primary ECS resources
 ├── variables.tf     # Input variables
 ├── data.tf
 ├── terraform.tfvars # Outputs from vpc, mongo_uri
