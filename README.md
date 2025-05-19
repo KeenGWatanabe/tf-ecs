@@ -52,3 +52,5 @@ Delete route tables
 Delete internet gateways
 
 Finally delete VPC
+
+ending
