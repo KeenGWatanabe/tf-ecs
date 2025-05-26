@@ -1,5 +1,5 @@
 resource "aws_lb" "app" {
-  name               = "nodejs-app-lb"
+  name               = "${var.name_prefix}${random_id.suffix.hex}nodejs-app-lb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
@@ -44,7 +44,7 @@ resource "aws_lb_listener" "app" {
 }
 
 resource "aws_security_group" "alb" {
-  name        = "nodejs-app-alb-sg"
+  name        = "${var.name_prefix}${random_id.suffix.hex}nodejs-app-alb-sg"
   description = "Allow HTTP/HTTPS inbound traffic"
   vpc_id      = var.vpc_id #aws_vpc.main.id 
 
