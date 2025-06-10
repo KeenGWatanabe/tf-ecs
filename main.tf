@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket = "ce-grp-4.tfstate-backend.com"
+    bucket = "taskmgr.tfstate-backend.com"
     key = "tf-ecs/terraform.tfstate"
     region = "us-east-1"
-    dynamodb_table = "ce-grp-4-terraform-state-locks"  # Critical for locking
+    dynamodb_table = "taskmgr-terraform-state-locks"  # Critical for locking
   }
 }
 
@@ -109,9 +109,9 @@ resource "aws_ecs_service" "app" {
 
   depends_on = [aws_lb_listener.app]
   
-  lifecycle {
-    ignore_changes = [task_definition, desired_count]
-  }
+  # lifecycle {
+  #   ignore_changes = [task_definition, desired_count]
+  # }
 }
 
 resource "aws_ecr_repository" "app" {

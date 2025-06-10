@@ -10,12 +10,12 @@ resource "aws_security_group" "ecs_tasks" {
     security_groups = [aws_security_group.alb.id]
   }
 
-  # egress {
-  #   protocol    = "-1"
-  #   from_port   = 0
-  #   to_port     = 0
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
   protocol    = "tcp"
   from_port   = 443
@@ -56,4 +56,22 @@ resource "aws_security_group" "vpc_endpoint" {
   tags = {
     Name = "${var.name_prefix}-vpc-endpoint-sg"
   }
+}
+
+resource "aws_vpc_endpoint" "ecr_dkr" {
+  vpc_id             = var.vpc_id
+  service_name       = "com.amazonaws.${var.region}.ecr.dkr"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.vpc_endpoint.id]
+  subnet_ids         = var.private_subnet_ids
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint" "ecr_api" {
+  vpc_id             = var.vpc_id
+  service_name       = "com.amazonaws.${var.region}.ecr.api"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.vpc_endpoint.id]
+  subnet_ids         = var.private_subnet_ids
+  private_dns_enabled = true
 }

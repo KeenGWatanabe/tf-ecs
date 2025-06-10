@@ -1,5 +1,10 @@
 # How to reference in other places
-
+variable "region" {
+  description = "AWS region where resources will be created"
+  type        = string
+  default     = "us-east-1"
+  
+}
 variable "MONGO_URI" {
   description = "MongoDB Atlas connection URI"
   type        = string
@@ -12,8 +17,8 @@ variable "vpc_id" {
 }
 
 variable "name_prefix" {
-  description = "ecs for ce994"
-  default = "ce994"
+  description = "ecs for taskmgr"
+  type        = string
 }
 
 variable "alb_subnet_ids" {
