@@ -4,3 +4,6 @@
 [submodule "vpc"]
 	path = vpc
 	url = https://github.com/KeenGWatanabe/tf-vpc-nat-eip-ec2
+[submodule "taskmgr"]
+	path = taskmgr
+	url = https://github.com/KeenGWatanabe/taskmgr
